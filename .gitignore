@@ -53,4 +53,4 @@ k8s/secret-local.yaml
 
 # Temporary files
 *.tmp
-*.temp
+*.temp*.tar
