@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: currency-bot
+  namespace: telegram-bots
+  labels:
+    app: currency-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: currency-bot
+  template:
+    metadata:
+      labels:
+        app: currency-bot
+    spec:
+      containers:
+      - name: currency-bot
+        # Замените на ваш Docker Hub репозиторий
+        image: your-dockerhub-username/currency-bot:latest
+        env:
+        - name: BOT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: currency-bot-secrets
+              key: BOT_TOKEN
+        - name: EXCHANGE_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: currency-bot-secrets
+              key: EXCHANGE_API_KEY
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        # Проверка жизнеспособности
+        livenessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "import sys; sys.exit(0)"
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        # Проверка готовности
+        readinessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "import sys; sys.exit(0)"
+          initialDelaySeconds: 5
+          periodSeconds: 10
+      restartPolicy: Always

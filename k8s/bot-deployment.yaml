@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telegram-currency-bot
+  labels:
+    app: telegram-currency-bot
+spec:
+  replicas: 1  # Один экземпляр бота (Telegram API не позволяет больше)
+  selector:
+    matchLabels:
+      app: telegram-currency-bot
+  template:
+    metadata:
+      labels:
+        app: telegram-currency-bot
+    spec:
+      containers:
+      - name: currency-bot
+        image: chevdev13/currency-bot:latest  # Ваш образ с Docker Hub
+        imagePullPolicy: Always  # Всегда проверять обновления
+        env:
+        - name: BOT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: telegram-bot-secret
+              key: BOT_TOKEN
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+        # Проверка здоровья приложения
+        livenessProbe:
+          exec:
+            command:
+            - pgrep
+            - -f
+            - "python bot.py"
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          exec:
+            command:
+            - pgrep
+            - -f
+            - "python bot.py"
+          initialDelaySeconds: 10
+          periodSeconds: 10

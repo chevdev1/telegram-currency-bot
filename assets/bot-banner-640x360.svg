@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-labelledby="title">
+  <title id="title">Зелёный аватар бота с буквой C (640x360)</title>
+  <defs>
+    <linearGradient id="g_green" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#baf7a8"/>
+      <stop offset="50%" stop-color="#2ecc71"/>
+      <stop offset="100%" stop-color="#009e66"/>
+    </linearGradient>
+    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#000" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <!-- white background -->
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <!-- main green disc with soft shadow -->
+  <circle cx="320" cy="180" r="150" fill="url(#g_green)" filter="url(#softShadow)"/>
+
+  <!-- subtle inner overlay for depth -->
+  <circle cx="320" cy="180" r="118" fill="rgba(255,255,255,0.04)"/>
+
+  <!-- decorative hexagon outline -->
+  <polygon points="320,70 420,120 420,240 320,290 220,240 220,120"
+           fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="14" stroke-linejoin="round"/>
+
+  <!-- glossy highlight -->
+  <ellipse cx="285" cy="150" rx="95" ry="36" fill="rgba(255,255,255,0.07)"/>
+
+  <!-- large white C centered -->
+  <text x="320" y="190" text-anchor="middle" dominant-baseline="middle"
+        font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+        font-weight="800" font-size="220" fill="#ffffff" >
+    C
+  </text>
+
+  <!-- thin outer ring -->
+  <circle cx="320" cy="180" r="150" fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="8"/>
+</svg>
